@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071426">
+    <title>Weather Dashboard | Global Weather Map</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🌤️</div>
+                <div>
+                    <h1>Weather Dashboard</h1>
+                    <p>Global Weather Monitoring System</p>
+                </div>
+            </div>
+
+            <div class="header-status">
+                <span class="status-dot"></span>
+                Live Weather Data
+            </div>
+        </header>
+
+        <section class="search-section">
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input
+                    type="text"
+                    id="citySearch"
+                    placeholder="Search for a city..."
+                    autocomplete="off"
+                >
+                <button id="searchBtn">Search</button>
+            </div>
+        </section>
+
+        <section class="stats-row">
+            <div class="stat-card">
+                <span class="stat-icon">🌍</span>
+                <div>
+                    <p class="stat-label">Cities on map</p>
+                    <h2 id="cityCount">0 / 515</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon">🌡️</span>
+                <div>
+                    <p class="stat-label">Map mode</p>
+                    <h2 id="currentModeLabel">Temperature</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon">📡</span>
+                <div>
+                    <p class="stat-label">Data source</p>
+                    <h2>Open-Meteo</h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+
+            <div class="map-top">
+                <div>
+                    <h2>World Weather Map</h2>
+                    <p>Explore live weather conditions around the world</p>
+                </div>
+
+                <div class="map-live">
+                    <span class="status-dot"></span>
+                    LIVE
+                </div>
+            </div>
+
+            <div class="map-modes">
+                <button class="mode-btn active" data-mode="temperature">
+                    <span>🌡️</span>
+                    Temperature
+                </button>
+
+                <button class="mode-btn" data-mode="humidity">
+                    <span>💧</span>
+                    Humidity
+                </button>
+
+                <button class="mode-btn" data-mode="wind">
+                    <span>🌬️</span>
+                    Wind
+                </button>
+            </div>
+
+            <div class="map-wrapper">
+                <div id="map"></div>
+
+                <div class="map-loading" id="mapLoading">
+                    <div class="loader"></div>
+                    <p id="loadingText">Loading weather data...</p>
+                </div>
+            </div>
+
+            <div class="legend-panel">
+                <div class="legend-heading">
+                    <h3 id="legendTitle">Temperature</h3>
+                    <span id="legendUnit">°C</span>
+                </div>
+
+                <div class="legend-gradient" id="legendGradient"></div>
+
+                <div class="legend-labels" id="legendLabels">
+                    <span>Cold</span>
+                    <span>Cool</span>
+                    <span>Warm</span>
+                    <span>Hot</span>
+                </div>
+
+                <p class="legend-description" id="legendDescription">
+                    Estimated temperature distribution based on available city weather data.
+                </p>
+            </div>
+
+            <div class="map-footer">
+                <span>🖱️ Scroll to zoom</span>
+                <span>📍 Select a city marker for details</span>
+                <span>🌐 OpenStreetMap</span>
+            </div>
+
+        </section>
+
+        <section class="weather-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Weather Details</h2>
+                    <p id="selectedCity">Select a city on the map</p>
+                </div>
+                <span class="weather-icon" id="weatherIcon">🌤️</span>
+            </div>
+
+            <div class="weather-grid">
+
+                <div class="weather-card">
+                    <span>🌡️</span>
+                    <p>Temperature</p>
+                    <h3 id="temperature">--°C</h3>
+                </div>
+
+                <div class="weather-card">
+                    <span>💧</span>
+                    <p>Humidity</p>
+                    <h3 id="humidity">--%</h3>
+                </div>
+
+                <div class="weather-card">
+                    <span>🌬️</span>
+                    <p>Wind Speed</p>
+                    <h3 id="windSpeed">-- km/h</h3>
+                </div>
+
+                <div class="weather-card">
+                    <span>🌡️</span>
+                    <p>Feels Like</p>
+                    <h3 id="feelsLike">--°C</h3>
+                </div>
+
+            </div>
+
+            <p class="weather-description" id="weatherDescription">
+                Choose a city to see current weather information.
+            </p>
+
+        </section>
+
+        <footer>
+            <p>Weather Dashboard · Powered by Open-Meteo & OpenStreetMap</p>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
